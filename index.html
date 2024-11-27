@@ -6,6 +6,65 @@
   <title>Jeu Clicker - Mimipepper vs Didox</title>
   <!-- Lien vers le fichier CSS -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Importer les fonctions nécessaires de Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-analytics.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
+
+    // Configuration de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBWPdlldp81VdUypprIudsc0gfL9cUhjA8",
+      authDomain: "mimipeppervsdidox-43af9.firebaseapp.com",
+      databaseURL: "https://mimipeppervsdidox-43af9-default-rtdb.firebaseio.com",
+      projectId: "mimipeppervsdidox-43af9",
+      storageBucket: "mimipeppervsdidox-43af9.firebasestorage.app",
+      messagingSenderId: "727780259199",
+      appId: "1:727780259199:web:e94d35d001dd759630964a",
+      measurementId: "G-4YWN0S0DCR"
+    };
+
+    // Initialiser Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Initialisation de la base de données
+    const database = getDatabase(app);
+
+    // Références aux scores dans Firebase
+    const scoreRefMimipepper = ref(database, 'scores/mimipepper');
+    const scoreRefDidox = ref(database, 'scores/didox');
+
+    // Initialisation des scores
+    let scoreMimipepper = 0;
+    let scoreDidox = 0;
+
+    // Lire les scores à partir de Firebase
+    onValue(scoreRefMimipepper, (snapshot) => {
+      scoreMimipepper = snapshot.val() || 0;
+      document.getElementById('score-mimipepper').textContent = scoreMimipepper;
+    });
+
+    onValue(scoreRefDidox, (snapshot) => {
+      scoreDidox = snapshot.val() || 0;
+      document.getElementById('score-didox').textContent = scoreDidox;
+    });
+
+    // Fonction pour ajouter des points
+    function addPoint(team) {
+      if (team === 'mimipepper') {
+        scoreMimipepper++;
+        set(scoreRefMimipepper, scoreMimipepper);
+      } else if (team === 'didox') {
+        scoreDidox++;
+        set(scoreRefDidox, scoreDidox);
+      }
+    }
+
+    // Exposer la fonction `addPoint` à l'HTML
+    window.addPoint = addPoint;
+  </script>
 </head>
 <body>
   <header>
