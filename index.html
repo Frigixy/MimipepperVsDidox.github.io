@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeu Clicker - Mimipepper vs Didox</title>
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Jeu Clicker - Mimipepper vs Didox</h1>
+    <p>Cliquez sur une équipe pour marquer des points !</p>
+  </header>
+
+  <main>
+    <section id="teams">
+      <div class="team" id="mimipepper" onclick="addPoint('mimipepper')">
+        <h2>Mimipepper</h2>
+        <p>Score: <span id="score-mimipepper">0</span></p>
+      </div>
+      <div class="team" id="didox" onclick="addPoint('didox')">
+        <h2>Didox</h2>
+        <p>Score: <span id="score-didox">0</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Jeu Clicker. Tous droits réservés.</p>
+  </footer>
+
+  <!-- Lien vers le fichier JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
